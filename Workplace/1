@@ -1,0 +1,18 @@
+import os, configparser, sys
+import pandas as pd 
+from glob import glob
+
+arg1 = sys.argv[1]
+
+config = configparser.ConfigParser()
+config.read('Pipeline.config')
+
+(forwd,reverse) = (config.get("MGI_Adapter",'forward'),config.get('MGI_Adapter','reverse'))
+
+(inp,outp) = (config.get('PATH','INPUT')+arg1,config.get('PATH','OUTPUT')+arg1)
+
+file_list = glob('%s/*.fastq'%inp)+glob('%s/*.fq'%inp)+glob('%s/*.fastq.gz'%inp)+glob('%s/*.fq.gz'%inp)
+
+print(file_list)
+
+
